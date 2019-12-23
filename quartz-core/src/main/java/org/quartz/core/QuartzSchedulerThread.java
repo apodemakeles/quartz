@@ -308,12 +308,12 @@ public class QuartzSchedulerThread extends Thread {
                         continue;
                     }
 
-                    if (triggers != null && !triggers.isEmpty()) {
+                    if (triggers != null && !triggers.isEmpty()) { // cz: triggers为空是唯一没走continue的情况
 
                         now = System.currentTimeMillis();
                         long triggerTime = triggers.get(0).getNextFireTime().getTime();
                         long timeUntilTrigger = triggerTime - now;
-                        while(timeUntilTrigger > 2) {
+                        while(timeUntilTrigger > 2) { //cz: 就一直等
                             synchronized (sigLock) {
                                 if (halted.get()) {
                                     break;
@@ -424,7 +424,7 @@ public class QuartzSchedulerThread extends Thread {
                         // Check that before waiting for too long in case this very job needs to be
                         // scheduled very soon
                         if (!isScheduleChanged()) {
-                          sigLock.wait(timeUntilContinue);
+                          sigLock.wait(timeUntilContinue); //cz: triggers为空会到这里，一次获取triggers为空会等待30s?!
                         }
                       }
                     } catch (InterruptedException ignore) {

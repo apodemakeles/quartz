@@ -526,7 +526,7 @@ public class RAMJobStore implements JobStore {
             found = (tw != null);
 
             if (found) {
-
+                //cz: 之所以没有简单的调用removeTrigger，可能是因为日志的不同
                 if (!tw.getTrigger().getJobKey().equals(newTrigger.getJobKey())) {
                     throw new JobPersistenceException("New trigger is not related to the same job as the old trigger.");
                 }
@@ -1561,7 +1561,7 @@ public class RAMJobStore implements JobStore {
                         continue;
                 }
                 Date prevFireTime = trigger.getPreviousFireTime();
-                // in case trigger was replaced between acquiring and firing
+                // in case trigger was replaced between acquiring and firing //cz: 所以要确保再删除一次
                 timeTriggers.remove(tw);
                 // call triggered on our copy, and the scheduler's copy
                 tw.trigger.triggered(cal);

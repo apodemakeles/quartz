@@ -430,7 +430,7 @@ public class SimpleThreadPool implements ThreadPool {
                 wt.run(runnable);
             } else {
                 // If the thread pool is going down, execute the Runnable
-                // within a new additional worker thread (no thread from the pool).
+                // within a new additional worker thread (no thread from the pool). //cz: why?
                 WorkerThread wt = new WorkerThread(this, threadGroup,
                         "WorkerThread-LastJob", prio, isMakeThreadsDaemons(), runnable);
                 busyWorkers.add(wt);
