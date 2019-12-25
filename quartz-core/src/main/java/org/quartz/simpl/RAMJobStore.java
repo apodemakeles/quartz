@@ -1576,9 +1576,10 @@ public class RAMJobStore implements JobStore {
 
                 JobDetail job = bndle.getJobDetail();
 
+
                 if (job.isConcurrentExectionDisallowed()) {
                     ArrayList<TriggerWrapper> trigs = getTriggerWrappersForJob(job.getKey());
-                    for (TriggerWrapper ttw : trigs) {
+                    for (TriggerWrapper ttw : trigs) { //cz: 由于状态的改变，即使有其他线程获取到同样的trigger，也会因为1553行的判断而丢弃此任务
                         if (ttw.state == TriggerWrapper.STATE_WAITING) {
                             ttw.state = TriggerWrapper.STATE_BLOCKED;
                         }

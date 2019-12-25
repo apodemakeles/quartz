@@ -447,7 +447,7 @@ public class SimpleTriggerImpl extends AbstractTrigger<SimpleTrigger> implements
      * 
      * <p>
      * If the misfire instruction is set to MISFIRE_INSTRUCTION_SMART_POLICY,
-     * then the following scheme will be used: <br>
+     * then the following schem e will be used: <br>
      * <ul>
      * <li>If the Repeat Count is <code>0</code>, then the instruction will
      * be interpreted as <code>MISFIRE_INSTRUCTION_FIRE_NOW</code>.</li>
